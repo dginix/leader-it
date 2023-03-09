@@ -1,5 +1,6 @@
 package com.example.leaderit.entity;
 
+import com.example.leaderit.util.mapper.JsonMapConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class Event {
     private String eventType;
 
     @Column(name = "payload", nullable = false, columnDefinition = "json")
+    @Convert(converter = JsonMapConverter.class)
     private Map<String, Object> payload;
 
     @Column(name = "date_created", nullable = false)
