@@ -1,4 +1,4 @@
-package com.example.leaderit.util.mapper;
+package com.example.leaderit.util.jsonmapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
