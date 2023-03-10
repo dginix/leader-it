@@ -16,7 +16,8 @@ public interface ActiveDeviceRepository extends JpaRepository<ActiveDevice, Long
 
     Page<ActiveDevice> findAll(Pageable page);
 
+    // TODO отнимать 30 минут в сервисе
     @Modifying
-    @Query("DELETE FROM ActiveDevice a WHERE a.dateOfLastActivity < :inactiveTime")
+    @Query("DELETE FROM ActiveDevice a WHERE a.dateLastActivity < :inactiveTime")
     void deleteInactiveDevices(@Param("inactiveTime") LocalDateTime inactiveTime);
 }
