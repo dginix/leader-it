@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface IotDeviceRepository extends JpaRepository<IotDevice, Long> {
     IotDevice findBySerialNumber(String serialNumber);
+    Page<IotDevice> findAll(Pageable pageable);
     Page<IotDevice> findByDeviceTypeIn(List<String> deviceType, Pageable pageable);
     Page<IotDevice> findByDateAddedBetween(LocalDateTime fromDate, LocalDateTime toDate, Pageable pageable);
 }

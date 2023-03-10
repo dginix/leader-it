@@ -10,5 +10,6 @@ import java.time.LocalDateTime;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
+    Page<Event> findAll(Pageable pageable);
     Page<Event> findByIotDeviceSerialNumberAndDateCreatedBetween(String serialNumber, LocalDateTime fromDate, LocalDateTime toDate, Pageable pageable);
 }
