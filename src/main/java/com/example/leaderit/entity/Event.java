@@ -24,6 +24,7 @@ public class Event {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "device_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private IotDevice iotDevice;
 
     @Column(name = "event_type", nullable = false)
@@ -31,7 +32,6 @@ public class Event {
 
     @Column(name = "payload", nullable = false, columnDefinition = "json")
     @Convert(converter = JsonMapConverter.class)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Map<String, Object> payload;
 
     @Column(name = "date_created", nullable = false)
