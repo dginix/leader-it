@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "iot_device")
@@ -32,5 +32,5 @@ public class IotDevice {
     private String secretKey;
 
     @Column(name = "date_added", nullable = false)
-    private Date dateAdded;
+    private LocalDateTime dateAdded;
 }
