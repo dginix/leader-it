@@ -1,6 +1,7 @@
 package com.example.leaderit.entity;
 
 import com.example.leaderit.util.mapper.JsonMapConverter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public class Event {
 
     @Column(name = "payload", nullable = false, columnDefinition = "json")
     @Convert(converter = JsonMapConverter.class)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Map<String, Object> payload;
 
     @Column(name = "date_created", nullable = false)

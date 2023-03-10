@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@Converter(autoApply = true)
+@Converter()
 @Slf4j
 public class JsonMapConverter implements AttributeConverter<Map<String, Object>, String> {
 
