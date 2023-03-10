@@ -33,4 +33,8 @@ public class IotDevice {
 
     @Column(name = "date_added", nullable = false)
     private LocalDateTime dateAdded;
+
+    public IotDevice(Long id) {
+        this.id = id;
+    }
 }
