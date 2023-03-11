@@ -24,13 +24,21 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final IotDeviceRepository iotDeviceRepository;
+    private final ActiveDeviceService activeDeviceService;
 
     @Autowired
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, IotDeviceRepository iotDeviceRepository) {
+    public EventServiceImpl(EventRepository eventRepository,
+                            EventMapper eventMapper,
+                            IotDeviceRepository iotDeviceRepository,
+                            ActiveDeviceService activeDeviceService) {
+
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
         this.iotDeviceRepository = iotDeviceRepository;
+        this.activeDeviceService = activeDeviceService;
     }
+
+    @Autowired
 
     @Override
     public EventDto addEventBySerialNumber(String serialNumber, String secretKey, @Valid EventDto eventDto) {
@@ -41,6 +49,8 @@ public class EventServiceImpl implements EventService {
         if (!iotDevice.getSecretKey().equals(secretKey)) {
             throw new WrongSecretKeyException("Wrong secret key");
         }
+
+        activeDeviceService.setDeviceActive(iotDevice);
 
         Event eventToSave = eventMapper.toEntity(eventDto);
         eventToSave.setDateCreated(LocalDateTime.now());

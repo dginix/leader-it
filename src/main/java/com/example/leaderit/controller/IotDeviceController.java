@@ -1,6 +1,7 @@
 package com.example.leaderit.controller;
 
 import com.example.leaderit.dto.*;
+import com.example.leaderit.service.ActiveDeviceService;
 import com.example.leaderit.service.EventService;
 import com.example.leaderit.service.IotDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,13 @@ public class IotDeviceController {
 
     private final IotDeviceService iotDeviceService;
     private final EventService eventService;
+    private final ActiveDeviceService activeDeviceService;
 
     @Autowired
-    public IotDeviceController(IotDeviceService iotDeviceService, EventService eventService) {
+    public IotDeviceController(IotDeviceService iotDeviceService, EventService eventService, ActiveDeviceService activeDeviceService) {
         this.iotDeviceService = iotDeviceService;
         this.eventService = eventService;
+        this.activeDeviceService = activeDeviceService;
     }
 
     // 1) Добавление нового устройства
@@ -52,7 +55,7 @@ public class IotDeviceController {
     // TODO мб. добавить в ответе серийный номер устройства
     @GetMapping("/active")
     public List<ActiveDeviceDto> getActiveDevices() {
-        return Collections.emptyList();
+        return activeDeviceService.getAllActiveDevices();
     }
 
     // 4) Получить информацию о конкретном устройстве по серийному номеру

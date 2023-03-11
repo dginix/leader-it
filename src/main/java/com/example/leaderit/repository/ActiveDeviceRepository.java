@@ -9,12 +9,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Repository
 public interface ActiveDeviceRepository extends JpaRepository<ActiveDevice, Long> {
-    ActiveDevice findByIotDeviceSerialNumber(String serialNumber);
-
     Page<ActiveDevice> findAll(Pageable page);
+    Optional<ActiveDevice> findByIotDeviceId(Long Long);
 
     // TODO отнимать 30 минут в сервисе
     @Modifying
