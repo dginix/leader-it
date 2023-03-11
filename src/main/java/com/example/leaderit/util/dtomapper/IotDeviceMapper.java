@@ -15,11 +15,19 @@ public class IotDeviceMapper {
         this.modelMapper = modelMapper;
     }
 
-    public IotDeviceDto toDto(IotDevice iotDevice) {
+    public IotDeviceDto toDTO(IotDevice iotDevice) {
+        IotDeviceDto iotDeviceDto = modelMapper.map(iotDevice, IotDeviceDto.class);
+        iotDeviceDto.setSecretKey(null);
+        return iotDeviceDto;
+    }
+
+    public IotDeviceDto toDtoOnCreate(IotDevice iotDevice) {
         return modelMapper.map(iotDevice, IotDeviceDto.class);
     }
 
     public IotDevice toEntity(IotDeviceDto iotDeviceDto) {
         return modelMapper.map(iotDeviceDto, IotDevice.class);
     }
+
+
 }
