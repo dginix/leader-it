@@ -1,6 +1,7 @@
 package com.example.leaderit.service;
 
 import com.example.leaderit.dto.EventDto;
+import com.example.leaderit.dto.StatisticsResponse;
 import com.example.leaderit.entity.Event;
 import com.example.leaderit.entity.IotDevice;
 import com.example.leaderit.exception.NoSuchDeviceFoundException;
@@ -65,5 +66,9 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findEventsBySerialNumber(serialNumber, startDateCreated, endDateCreated, pageable).stream()
                 .map(eventMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    public List<StatisticsResponse> getStatistics(LocalDateTime startDate, LocalDateTime endDate) {
+        return eventRepository.getStatistics(startDate, endDate);
     }
 }
