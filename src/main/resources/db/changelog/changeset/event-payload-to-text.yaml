@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: alter_table_event_payload
+      author: Denis Kruchinin
+      changes:
+        - modifyDataType:
+            columnName: payload
+            newDataType: text
+            tableName: event
+        - dropNotNullConstraint:
+            columnName: payload
+            tableName: event

@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -30,7 +29,7 @@ public class Event {
     @Column(name = "event_type", nullable = false)
     private String eventType;
 
-    @Column(name = "payload", nullable = false, columnDefinition = "json")
+    @Column(name = "payload")
     @Convert(converter = JsonMapConverter.class)
     private Map<String, Object> payload;
 
