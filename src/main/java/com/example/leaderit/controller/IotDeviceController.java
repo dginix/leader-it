@@ -1,13 +1,13 @@
 package com.example.leaderit.controller;
 
-import com.example.leaderit.dto.ActiveDeviceDto;
-import com.example.leaderit.dto.EventDto;
-import com.example.leaderit.dto.IotDeviceDto;
-import com.example.leaderit.dto.StatisticsResponse;
+import com.example.leaderit.dto.*;
+import com.example.leaderit.service.EventService;
 import com.example.leaderit.service.IotDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -17,10 +17,12 @@ import java.util.List;
 public class IotDeviceController {
 
     private final IotDeviceService iotDeviceService;
+    private final EventService eventService;
 
     @Autowired
-    public IotDeviceController(IotDeviceService iotDeviceService) {
+    public IotDeviceController(IotDeviceService iotDeviceService, EventService eventService) {
         this.iotDeviceService = iotDeviceService;
+        this.eventService = eventService;
     }
 
     // 1) Добавление нового устройства
@@ -40,8 +42,8 @@ public class IotDeviceController {
     // таблице "Перечень активных устройств"
     // TODO @Valid, добавить условия в EventDto
     @PostMapping("/{deviceSerialNumber}/events")
-    public EventDto addEvent(@RequestBody EventDto eventDto) {
-        return eventDto;
+    public EventDto addEvent(@PathVariable String deviceSerialNumber, @RequestBody @Valid EventRequest eventRequest) {
+        return eventService.addEventBySerialNumber(deviceSerialNumber, eventRequest.getSecretKey(), eventRequest.getEventDto());
     }
 
     // 3) Получить информацию об активных устройствах
@@ -81,11 +83,12 @@ public class IotDeviceController {
     @GetMapping("/{deviceSerialNumber}/events")
     public List<EventDto> getEventsBySerialNumber(
             @PathVariable String deviceSerialNumber,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateAdded,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDateCreated,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDateCreated,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
-        return Collections.emptyList();
+        return eventService.getEventsBySerialNumber(deviceSerialNumber, startDateCreated, endDateCreated, page, size);
     }
 
     // 7) Получить статистику по указанному периоду времени о количестве полученных событий,

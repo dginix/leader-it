@@ -19,6 +19,7 @@ public class EventMapper {
     public EventDto toDTO(Event event) {
         EventDto eventDTO = modelMapper.map(event, EventDto.class);
         eventDTO.setIotDeviceId(event.getIotDevice().getId());
+        eventDTO.setIotDeviceSerialNumber(event.getIotDevice().getSerialNumber());
         return eventDTO;
     }
 
