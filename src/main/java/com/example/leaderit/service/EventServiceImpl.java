@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -38,8 +39,7 @@ public class EventServiceImpl implements EventService {
         this.activeDeviceService = activeDeviceService;
     }
 
-    @Autowired
-
+    @Transactional
     @Override
     public EventDto addEventBySerialNumber(String serialNumber, String secretKey, @Valid EventDto eventDto) {
         IotDevice iotDevice = iotDeviceRepository.findBySerialNumber(serialNumber).orElseThrow(
