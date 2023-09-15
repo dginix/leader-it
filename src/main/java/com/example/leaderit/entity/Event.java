@@ -1,6 +1,6 @@
 package com.example.leaderit.entity;
 
-import com.example.leaderit.util.jsonmapper.JsonMapConverter;
+import com.example.leaderit.util.json_mapper.JsonMapConverter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

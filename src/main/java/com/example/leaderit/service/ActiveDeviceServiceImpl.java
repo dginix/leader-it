@@ -4,7 +4,7 @@ import com.example.leaderit.dto.ActiveDeviceDto;
 import com.example.leaderit.entity.ActiveDevice;
 import com.example.leaderit.entity.IotDevice;
 import com.example.leaderit.repository.ActiveDeviceRepository;
-import com.example.leaderit.util.dtomapper.ActiveDeviceMapper;
+import com.example.leaderit.util.dto_mapper.ActiveDeviceMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

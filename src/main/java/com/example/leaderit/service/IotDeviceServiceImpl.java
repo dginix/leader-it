@@ -5,7 +5,7 @@ import com.example.leaderit.entity.IotDevice;
 import com.example.leaderit.exception.NoSuchDeviceFoundException;
 import com.example.leaderit.repository.IotDeviceRepository;
 import com.example.leaderit.security.SecretKeyGenerator;
-import com.example.leaderit.util.dtomapper.IotDeviceMapper;
+import com.example.leaderit.util.dto_mapper.IotDeviceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

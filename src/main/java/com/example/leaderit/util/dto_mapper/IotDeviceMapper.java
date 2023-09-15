@@ -1,19 +1,15 @@
-package com.example.leaderit.util.dtomapper;
+package com.example.leaderit.util.dto_mapper;
 
 import com.example.leaderit.dto.IotDeviceDto;
 import com.example.leaderit.entity.IotDevice;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class IotDeviceMapper {
     private final ModelMapper modelMapper;
-
-    @Autowired
-    public IotDeviceMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
 
     public IotDeviceDto toDTO(IotDevice iotDevice) {
         IotDeviceDto iotDeviceDto = modelMapper.map(iotDevice, IotDeviceDto.class);
@@ -28,6 +24,4 @@ public class IotDeviceMapper {
     public IotDevice toEntity(IotDeviceDto iotDeviceDto) {
         return modelMapper.map(iotDeviceDto, IotDevice.class);
     }
-
-
 }

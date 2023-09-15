@@ -1,4 +1,4 @@
-package com.example.leaderit.util.dtomapper;
+package com.example.leaderit.util.dto_mapper;
 
 import com.example.leaderit.dto.EventDto;
 import com.example.leaderit.entity.Event;

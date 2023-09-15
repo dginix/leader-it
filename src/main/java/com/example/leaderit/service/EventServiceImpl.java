@@ -8,7 +8,7 @@ import com.example.leaderit.exception.NoSuchDeviceFoundException;
 import com.example.leaderit.exception.WrongSecretKeyException;
 import com.example.leaderit.repository.EventRepository;
 import com.example.leaderit.repository.IotDeviceRepository;
-import com.example.leaderit.util.dtomapper.EventMapper;
+import com.example.leaderit.util.dto_mapper.EventMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

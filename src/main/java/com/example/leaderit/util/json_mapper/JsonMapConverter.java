@@ -1,4 +1,4 @@
-package com.example.leaderit.util.jsonmapper;
+package com.example.leaderit.util.json_mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -15,7 +15,7 @@ import java.util.Map;
 @Slf4j
 public class JsonMapConverter implements AttributeConverter<Map<String, Object>, String> {
 
-    private final static ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
     @Override
     public String convertToDatabaseColumn(Map<String, Object> customerInfo) {
 
