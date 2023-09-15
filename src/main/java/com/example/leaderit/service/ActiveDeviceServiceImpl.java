@@ -5,27 +5,26 @@ import com.example.leaderit.entity.ActiveDevice;
 import com.example.leaderit.entity.IotDevice;
 import com.example.leaderit.repository.ActiveDeviceRepository;
 import com.example.leaderit.util.dtomapper.ActiveDeviceMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class ActiveDeviceServiceImpl implements ActiveDeviceService {
 
     private final ActiveDeviceRepository activeDeviceRepository;
     private final ActiveDeviceMapper activeDeviceMapper;
 
-    @Autowired
-    public ActiveDeviceServiceImpl(ActiveDeviceRepository activeDeviceRepository, ActiveDeviceMapper activeDeviceMapper) {
-        this.activeDeviceRepository = activeDeviceRepository;
-        this.activeDeviceMapper = activeDeviceMapper;
-    }
-
     @Override
+    @Transactional
     public ActiveDevice setDeviceActive(IotDevice iotDevice) {
         Optional<ActiveDevice> currentActivity = activeDeviceRepository.findByIotDeviceId(iotDevice.getId());
         if (currentActivity.isPresent()) {
@@ -40,8 +39,15 @@ public class ActiveDeviceServiceImpl implements ActiveDeviceService {
     }
 
     @Override
+    @Transactional
     public List<ActiveDeviceDto> getAllActiveDevices() {
-        activeDeviceRepository.deleteInactiveDevices(LocalDateTime.now().minusMinutes(30));
         return activeDeviceRepository.findAll().stream().map(activeDeviceMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void deleteInactiveDevices() {
+        log.info("Start deleting inactive devices");
+        activeDeviceRepository.deleteInactiveDevices(LocalDateTime.now().minusMinutes(30));
     }
 }

@@ -12,3 +12,6 @@ spring:
         show_sql: true
   liquibase:
     enabled: true
+
+scheduler:
+  delete-inactive-devices: 0 */30 * * * *

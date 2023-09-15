@@ -9,4 +9,5 @@ import java.util.List;
 public interface ActiveDeviceService {
     ActiveDevice setDeviceActive(IotDevice iotDevice);
     List<ActiveDeviceDto> getAllActiveDevices();
+    void deleteInactiveDevices();
 }
